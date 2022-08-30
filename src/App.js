@@ -8,12 +8,8 @@ export class App extends Component {
   // static propTypes = {
 
   // }
-   constructor(){
-    super();
-    this.H1="Nice TO With H1 MEET CLASS";
- 
-   };
-   H2 = "nice to MEET WITH H2 New Class"
+   
+  
   render() {
     return (
       <>
