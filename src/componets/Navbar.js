@@ -3,15 +3,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class Navbar extends Component {
-    constructor(){
-        super();
-        this.A_Bold = "News-APP";
-
-    }
-  static propTypes = {
-    prop: PropTypes,
     
-  }
+    A_Bold = "News-APP";
+    
   render() {
     return (
       <>
