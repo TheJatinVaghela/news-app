@@ -9,7 +9,7 @@ export default class Navbar extends Component {
   render() {
     return (
       <>
-        <nav className="navbar top-0 bg-orange-600">
+        <nav className="navbar top-0 bg-orange-600 sticky z-10">
            <div className="container-fluid !justify-center bg-transparent">
               <a className="navbar-brand text-3xl font-bold" href="#/">{this.A_Bold}</a>
           </div>
