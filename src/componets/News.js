@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react'
 import PropTypes from 'prop-types'
 import NewsItem from './NewsItem.js'
 export default class News extends Component {
+<<<<<<< HEAD
     TEXT="Full Info";
 
   
@@ -14,6 +15,9 @@ export default class News extends Component {
             loeading:false,
           }
     };
+=======
+   
+>>>>>>> 9e196c4417b01f6996021bcbe71c2533b44128df
     
     
     h1="NEWS Componets";
@@ -24,6 +28,7 @@ export default class News extends Component {
         Info:{
                 Text:"Full Info",
                 Link:`https://www.spiegel.de/wirtschaft/kryptowaehrung-bitcoin-rauscht-unter-die-20-000-dollar-marke-a-22ae4b3d-9d68-4b95-93c7-a55ed4523abe`,
+<<<<<<< HEAD
                 Img_Link:"https://cdn.prod.www.spiegel.de/images/dc9503f6-cb76-4652-9f18-a474586a73a2_w1280_r1.77_fpx49.99_fpy54.99.jpg",
              },
             }
@@ -44,10 +49,19 @@ export default class News extends Component {
 
 
     
+=======
+             },
+    }
+
+   
+  render() {
+   
+>>>>>>> 9e196c4417b01f6996021bcbe71c2533b44128df
     return (
       <>
       <h1>{this.h1}</h1>
       <div className='container my-3'>
+<<<<<<< HEAD
          <div id='Main' className="grid gap-3">
         
          {this.state.articles.map((OBJ)=> <NewsItem key={OBJ.url} Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>)}
@@ -67,6 +81,15 @@ export default class News extends Component {
 
       </div>
        </>
+=======
+        <NewsItem Info_OBJ={this.T_D2} />
+        <NewsItem Info_OBJ={this.T_D2} />
+        <NewsItem Info_OBJ={this.T_D2} />
+        <NewsItem Info_OBJ={this.T_D2} />
+        <NewsItem Info_OBJ={this.T_D2} />
+      </div>
+      </>
+>>>>>>> 9e196c4417b01f6996021bcbe71c2533b44128df
     )
   }
 }
