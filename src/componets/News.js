@@ -33,6 +33,7 @@ export default class News extends Component {
         let data =  await fetch(url);
         let parsedData = await data.json()
           console.log(parsedData);
+          // changing artical value using this.setState
           this.setState({articles:parsedData.articles})
   }
       
