@@ -7,6 +7,8 @@ export default class News extends Component {
   
  constructor(){
         super();
+  // key in this.state needs to be in lowercase if not Error
+
           this.state={
             articles : [],
             loeading:false,
