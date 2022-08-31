@@ -13,3 +13,6 @@
   font-size: clamp(.5rem, .7rem + 1.3333vw, 6rem);
   height: fit-content;
 }
+.ml{
+ margin-left: -2%;
+}
