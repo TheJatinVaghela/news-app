@@ -1322,7 +1322,9 @@ export default class News extends Component {
          loeading:false,
          h1:"News HeadLines",
          localStorageData : "",
+         
         }
+       
       
     };
  // runs After evrything undder render() is done 
@@ -1336,57 +1338,45 @@ export default class News extends Component {
        //console.log(parsedData);
 
        if (parsedData.status==="error") {
-        //console.log("NUll");
-         this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}))
-        //console.log(this.state.localStorageData);
-        if (this.state.localStorageData.status !== 'error') {
-         // console.log("localStorageData NOT  NULL");
-          this.articles2.push(this.state.localStorageData);
-          this.setState({ articles: this.articles2.articles,});
-         // console.log(this.articles2.articles);
-        }else if(this.state.localStorageData.status === 'error'){
-          //console.log("localStorageData IS NULL");      
-          //console.log(this.state.localStorageData);    
-          this.setState({ articles: this.articles.articles,});
-          //console.log(this.articles.articles);
-        }
-        //console.log(this.state);
-       }
+
+         this.setState({ articles: this.articles.articles,});
+
+      }else if (parsedData.status==="ok"){
+        console.log("Parsed Data OK");
+        this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}));
+        this.articles=[];
+        this.articles.push(this.state.localStorageData);
+        this.setState({ articles: this.articles.articles,});
+       };
         
-       this.Page1_setState(0,5)
-          
-  }
-  Page1_setState(a,b){
-   
-    this.setState((prew)=>({
+       this.FirstFive_setState(0,5)
+      
+       
+  };
+  FirstFive_setState(a,b){
+   this.setState((prew)=>({
       articles: prew = this.articles.articles.slice(a , b),
     }))
-  } 
+  };
 
-  Page2_setState(e){
+   Page_setState(e){
     this.setState((prew)=>({
       articles: prew = this.articles.articles.slice( ( Number ( Number (Number (e.target.innerHTML) - 1 ) * 5) )  , ( Number ( Number ( Number (Number (e.target.innerHTML) - 1 ) * 5) + 5 ) )   ),
     }))
-  }
-
-   Page2 = (e)=>{ 
+   };
+  
+  ActiveClass(e){
     let ActivePage1= document.getElementsByClassName("active");
     ActivePage1[0].classList.remove("active");
     e.target.classList.add("active")
-         
-    this.Page2_setState(e);
-   
-   }
+  };
 
-   Page1 = (e)=>{
-      
-    let ActivePage1= document.getElementsByClassName("active");
-    ActivePage1[0].classList.remove("active");
-    e.target.classList.add("active")
-    
-   this.Page1_setState(0,5)
-     
-   }
+  Page2 = (e)=>{ 
+   this.ActiveClass(e)
+   this.Page_setState(e);
+  };
+
+  
       
   render() {
     console.log("Rendew ");
@@ -1398,7 +1388,7 @@ export default class News extends Component {
  {/* BootStap Paginatine */}
  <nav className='flex justify-center my-4 sticky top-0 z-20' aria-label="...">
   <ul className="pagination pagination-sm" >
-    <li className="page-item active" onClick={this.Page1}> <a  className="page-link Font" href='#'>total</a>   </li>
+    <li className="page-item active" onClick={this.Page2}> <a  className="page-link Font" href='#'>1</a>   </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">2</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">3</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">4</a> </li>
@@ -1417,7 +1407,8 @@ export default class News extends Component {
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">17</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">18</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">19</a> </li>
-    
+     
+  
     
     
   </ul>

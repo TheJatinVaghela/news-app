@@ -7,6 +7,7 @@ export default class NewsItem extends Component {
     this.state={
       
     }
+    
   }
   
 
@@ -15,8 +16,8 @@ export default class NewsItem extends Component {
     
     return(
       <>
-     <div className="card w-full Font border-2 border-orange-500">
-              <img src={(!Img)?  "https://media.wired.com/photos/62e95bada1dc74857a858363/191:100/w_1280,c_limit/Bitcoin-Fog-Security-GettyImages-1241143235.jpg": Img} className="card-img-top" alt="..." />
+     <div className="card w-full Font border-2 border-orange-500" >
+              <img src={(!Img)? "https://i.insider.com/62e42a454b455800188b68ff?width=1200&format=jpeg": Img} className="card-img-top" alt="No IMG"/>
           <div className="card-body bg-orange-300">
             <h5 className="card-title font-bold">{(Title !== null)? Title.slice(0, 30) : Title} <span  className='ml'  onClick={(e)=>{e.target.innerText=Title.slice(30,100)}}>...</span> </h5>
               <p className="card-text">{(Description !== null)? Description.slice(0, 30) : Description} <span  className='ml'  onClick={(e)=>{e.target.innerText=Description.slice(30,200)}}>...</span> </p>
