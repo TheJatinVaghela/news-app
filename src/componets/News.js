@@ -4,7 +4,10 @@ import NewsItem from './NewsItem.js'
 export default class News extends Component {
 
     TEXT="Full Info";
-     articles=[
+     articles={
+      "status": "ok",
+      "totalResults": 10032,
+      "articles":[
       
           {
             "source": {
@@ -1306,36 +1309,64 @@ export default class News extends Component {
             "publishedAt": "2022-08-29T16:06:24Z",
             "content": "Der Markt für Kryptowährungen leidet unter der Aussicht auf deutlich steigende Leitzinsen. Die nach Marktwert größte Digitalanlage Bitcoin kostete am Montagvormittag auf der Handelsplattform Bitfinex… [+1289 chars]"
           }
-        ]
-    
-    
-  
- constructor(){
-        super();
-  // key in this.state needs to be in lowercase if not Error
+        ]}
 
-          this.state={
-            articles : [],
-            loeading:false,
-             h1:"News HeadLines",
-          }
+     
+     articles2=[];
+     constructor(){
+       super();
+       // key in this.state needs to be in lowercase if not Error
+       
+       this.state={
+         articles : [],
+         loeading:false,
+         h1:"News HeadLines",
+         localStorageData : "",
+        }
+      
     };
-
-  
-  
-   
-   
-   
-
-   // runs After evrything undder render() is done 
-    componentDidMount(){
+ // runs After evrything undder render() is done 
+  async  componentDidMount(){
     console.log("DID MOUNT RENDER");
-      //  let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=1&pageSize=100 `   
-      //  let data =  await fetch(url);
-      //  let parsedData = await data.json()
-      //    console.log(parsedData);
-          // changing artical value using this.setState
-          this.setState({ articles: this.articles,})
+
+       let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=100&pageSize=100 `   
+       let data =  await fetch(url);
+       let parsedData = await data.json();
+       localStorage.setItem("ParsedData", JSON.stringify(parsedData));
+       //console.log(parsedData);
+
+       if (parsedData.status==="error") {
+        //console.log("NUll");
+         this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}))
+        //console.log(this.state.localStorageData);
+        if (this.state.localStorageData.status !== 'error') {
+         // console.log("localStorageData NOT  NULL");
+          this.articles2.push(this.state.localStorageData);
+          this.setState({ articles: this.articles2.articles,});
+         // console.log(this.articles2.articles);
+        }else if(this.state.localStorageData.status === 'error'){
+          //console.log("localStorageData IS NULL");      
+          //console.log(this.state.localStorageData);    
+          this.setState({ articles: this.articles.articles,});
+          //console.log(this.articles.articles);
+        }
+        //console.log(this.state);
+       }
+        
+       this.Page1_setState(0,5)
+          
+  }
+  Page1_setState(a,b){
+   
+    this.setState((prew)=>({
+      articles: prew = this.articles.articles.slice(a , b),
+    }))
+  } 
+
+  Page2_setState(e){
+    this.setState((prew)=>({
+      articles: prew = this.articles.articles.slice( ( Number ( Number (Number (e.target.innerHTML) - 1 ) * 5) )  , ( Number ( Number ( Number (Number (e.target.innerHTML) - 1 ) * 5) + 5 ) )   ),
+    }))
   }
 
    Page2 = (e)=>{ 
@@ -1343,9 +1374,7 @@ export default class News extends Component {
     ActivePage1[0].classList.remove("active");
     e.target.classList.add("active")
          
-     this.setState({
-      articles: this.articles.slice(parseInt(e.target.innerHTML) ,( parseInt(e.target.innerHTML) + parseInt(e.target.innerHTML))),
-     })
+    this.Page2_setState(e);
    
    }
 
@@ -1355,7 +1384,7 @@ export default class News extends Component {
     ActivePage1[0].classList.remove("active");
     e.target.classList.add("active")
     
-   this.setState({articles: this.articles,})
+   this.Page1_setState(0,5)
      
    }
       
