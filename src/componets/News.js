@@ -1329,7 +1329,7 @@ export default class News extends Component {
          loeading:false,
          h1:"News HeadLines",
          localStorageData : "",
-         PageCards:10,
+         PageCards:5,
         }
         this.LeNunmberArr={"Nu":[],"Co":[]};
       
@@ -1337,29 +1337,36 @@ export default class News extends Component {
  // runs After evrything undder render() is done 
   async  componentDidMount(){
     console.log("DID MOUNT RENDER");
-
-       let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=100&pageSize=100 `   
-       let data =  await fetch(url);
-       let parsedData = await data.json();
-       localStorage.setItem("ParsedData", JSON.stringify(parsedData));
-       //console.log(parsedData);
-
-       if (parsedData.status==="error") {
-          console.log("Error");
-         this.setState({ articles: this.articles.articles,});
-
-      }else if (parsedData.status==="ok"){
-        console.log("Parsed Data OK");
-        this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}));
-        this.articles=[];
-        this.articles.push(this.state.localStorageData);
-        this.setState({ articles: this.articles.articles,});
-       };
-      
-       this.FirstFive_setState(0,this.state.PageCards)
-       this.ForNumber(this.articles.articles.length, this.state.PageCards);
+       let LastLocalData = [].push(JSON.parse(localStorage.getItem("ParsedData")));
        
-  };
+    if(LastLocalData.status==="error" || localStorage.length===0){
+         console.log("LastLocalData is NOT OK");
+         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=100&pageSize=100 `   
+         let data =  await fetch(url);
+         let parsedData = await data.json();
+         localStorage.setItem("ParsedData", JSON.stringify(parsedData));
+         //console.log(parsedData);
+         
+            if (parsedData.status==="error") {
+             console.log("Error");
+             this.setState({ articles: this.articles.articles,});
+            }else if (parsedData.status==="ok"){
+              console.log("Parsed Data OK");
+              this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}));
+              this.articles=[];
+              this.articles.push(this.state.localStorageData);
+              this.setState({ articles: this.articles.articles,});
+            }
+    }else if(LastLocalData.status==="ok"){
+        console.log("LastLocalData is OK");
+        this.articles=[];
+        this.articles.push(LastLocalData);
+        this.setState({ articles: this.articles.articles,});
+    };
+
+      this.FirstFive_setState(0,this.state.PageCards)
+      this.ForNumber(this.articles.articles.length, this.state.PageCards);
+   };
   
 ForNumber(a,b){
    let i = 2;
@@ -1410,8 +1417,8 @@ ForNumber(a,b){
       <h1 className='Font-H1 font-bold text-center my-4'>{this.state.h1}</h1>
  {/* BootStap Chose PageCards */}
     
-        <input  onBlur={(e)=>{if(Number(e.target.value) === 0){e.target.value=1; console.log(Number(e.target.value));};  this.setState((prew)=>({PageCards:prew.PageCards=Number(e.target.value) ,})); this.FirstFive_setState(0,Number(e.target.value)); this.ForNumber(this.articles.articles.length,Number(e.target.value))}} className="form-control me-2" pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success" >{this.props.Search}</button>
+        <input className="form-control mx-auto w-fit" onBlur={(e)=>{ let NUM=Number(e.target.value);  if(NUM === 0 || isNaN(NUM)){e.target.value=5; console.log(Number(e.target.value));};  this.setState((prew)=>({PageCards:prew.PageCards=Number(e.target.value) ,})); this.FirstFive_setState(0,Number(e.target.value)); this.ForNumber(this.articles.articles.length,Number(e.target.value))}} pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Search" aria-label="Search" />
+        <button className="btn btn-outline-success mx-auto block" >{this.props.Search}</button>
       
 
 {/* BootStap Paginatine */}
