@@ -1404,7 +1404,7 @@ ForNumber(a,b){
       <h1 className='Font-H1 font-bold text-center my-4'>{this.state.h1}</h1>
  {/* BootStap Chose PageCards */}
     
-        <input  onBlur={(e)=>{ this.setState((prew)=>({PageCards:prew.PageCards=Number(e.target.value) ,})); this.FirstFive_setState(0,Number(e.target.value)); this.ForNumber(this.articles.articles.length,Number(e.target.value))}} className="form-control me-2" pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Search" aria-label="Search" />
+        <input  onBlur={(e)=>{if(Number(e.target.value) === 0){e.target.value=1; console.log(Number(e.target.value));};  this.setState((prew)=>({PageCards:prew.PageCards=Number(e.target.value) ,})); this.FirstFive_setState(0,Number(e.target.value)); this.ForNumber(this.articles.articles.length,Number(e.target.value))}} className="form-control me-2" pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Search" aria-label="Search" />
         <button className="btn btn-outline-success" >Search</button>
       
 
