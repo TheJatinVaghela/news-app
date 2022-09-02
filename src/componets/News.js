@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import PropTypes from 'prop-types'
 import NewsItem from './NewsItem.js'
+import Li_comp from './LI_comp.js'
 export default class News extends Component {
 
     TEXT="Full Info";
@@ -1322,9 +1323,9 @@ export default class News extends Component {
          loeading:false,
          h1:"News HeadLines",
          localStorageData : "",
-         
+         PageCards:5,
         }
-       
+        this.LeNunmberArr={"Nu":[],"Co":[]};
       
     };
  // runs After evrything undder render() is done 
@@ -1338,7 +1339,7 @@ export default class News extends Component {
        //console.log(parsedData);
 
        if (parsedData.status==="error") {
-
+          console.log("Error");
          this.setState({ articles: this.articles.articles,});
 
       }else if (parsedData.status==="ok"){
@@ -1350,18 +1351,31 @@ export default class News extends Component {
        };
         
        this.FirstFive_setState(0,5)
-      
+       this.ForNumber(this.articles.articles.length, this.state.PageCards);
        
   };
+ 
+  ForNumber(a,b){
+   let i = 2;
+   let le = a / b;
+   this.LeNunmberArr={"Nu":[]};
+   while (i < le) {
+     if(this.LeNunmberArr.Nu.includes(i)!== i ){
+      this.LeNunmberArr.Nu.push(i++);
+    }
+    };
+  //console.log(this.LeNunmberArr);
+  }  ;
+
   FirstFive_setState(a,b){
    this.setState((prew)=>({
       articles: prew = this.articles.articles.slice(a , b),
     }))
   };
 
-   Page_setState(e){
+   Page_setState(e, PC){
     this.setState((prew)=>({
-      articles: prew = this.articles.articles.slice( ( Number ( Number (Number (e.target.innerHTML) - 1 ) * 5) )  , ( Number ( Number ( Number (Number (e.target.innerHTML) - 1 ) * 5) + 5 ) )   ),
+      articles: prew = this.articles.articles.slice( ( Number ( Number (Number (e.target.innerHTML) - 1 ) * PC) )  , ( Number ( Number ( Number (Number (e.target.innerHTML) - 1 ) * PC) + PC ) )   ),
     }))
    };
   
@@ -1373,7 +1387,7 @@ export default class News extends Component {
 
   Page2 = (e)=>{ 
    this.ActiveClass(e)
-   this.Page_setState(e);
+   this.Page_setState(e, this.state.PageCards);
   };
 
   
@@ -1389,7 +1403,10 @@ export default class News extends Component {
  <nav className='flex justify-center my-4 sticky top-0 z-20' aria-label="...">
   <ul className="pagination pagination-sm" >
     <li className="page-item active" onClick={this.Page2}> <a  className="page-link Font" href='#'>1</a>   </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">2</a> </li>
+    
+    {this.LeNunmberArr.Nu.map((A, index)=> <Li_comp key={index} OnCkick={this.Page2} Number={A}/>)}
+    {/*this.LeNunmberArr.map(A=> <Li_comp OnCkick={this.Page2} Number={A}/>)*/}
+ {/*  <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">2</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">3</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">4</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">5</a> </li>
@@ -1408,7 +1425,7 @@ export default class News extends Component {
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">18</a> </li>
     <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">19</a> </li>
      
-  
+    */}
     
     
   </ul>
