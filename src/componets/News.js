@@ -1323,7 +1323,7 @@ export default class News extends Component {
          loeading:false,
          h1:"News HeadLines",
          localStorageData : "",
-         PageCards:5,
+         PageCards:3,
         }
         this.LeNunmberArr={"Nu":[],"Co":[]};
       
@@ -1350,7 +1350,7 @@ export default class News extends Component {
         this.setState({ articles: this.articles.articles,});
        };
         
-       this.FirstFive_setState(0,5)
+       this.FirstFive_setState(0,this.state.PageCards)
        this.ForNumber(this.articles.articles.length, this.state.PageCards);
        
   };
@@ -1401,7 +1401,7 @@ export default class News extends Component {
       <h1 className='Font-H1 font-bold text-center my-4'>{this.state.h1}</h1>
  {/* BootStap Paginatine */}
  <nav className='flex justify-center my-4 sticky top-0 z-20' aria-label="...">
-  <ul className="pagination pagination-sm" >
+  <ul className="pagination pagination-sm flex justify-center align-middle flex-wrap " >
     <li className="page-item active" onClick={this.Page2}> <a  className="page-link Font" href='#'>1</a>   </li>
     
     {this.LeNunmberArr.Nu.map((A, index)=> <Li_comp key={index} OnCkick={this.Page2} Number={A}/>)}
