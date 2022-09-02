@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import NewsItem from './NewsItem.js'
 import Li_comp from './LI_comp.js'
 export default class News extends Component {
+    static defaultProps = {
+      Search: 'Search',
+    }
+    static propType={
+      Search: PropTypes.string,
+    }
 
     TEXT="Full Info";
      articles={
@@ -1405,7 +1411,7 @@ ForNumber(a,b){
  {/* BootStap Chose PageCards */}
     
         <input  onBlur={(e)=>{if(Number(e.target.value) === 0){e.target.value=1; console.log(Number(e.target.value));};  this.setState((prew)=>({PageCards:prew.PageCards=Number(e.target.value) ,})); this.FirstFive_setState(0,Number(e.target.value)); this.ForNumber(this.articles.articles.length,Number(e.target.value))}} className="form-control me-2" pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success" >Search</button>
+        <button className="btn btn-outline-success" >{this.props.Search}</button>
       
 
 {/* BootStap Paginatine */}
@@ -1425,7 +1431,7 @@ ForNumber(a,b){
 
          <div id='Main' className="grid gap-3">
         
-         {this.state.articles.map((OBJ)=> <NewsItem key={OBJ.url} Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>)}
+         {this.state.articles.map((OBJ)=> <NewsItem key={OBJ.url} Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage} Date={OBJ.publishedAt} Author={OBJ.author}/>)}
         
          
 
