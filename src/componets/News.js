@@ -1323,7 +1323,7 @@ export default class News extends Component {
          loeading:false,
          h1:"News HeadLines",
          localStorageData : "",
-         PageCards:3,
+         PageCards:10,
         }
         this.LeNunmberArr={"Nu":[],"Co":[]};
       
@@ -1349,13 +1349,13 @@ export default class News extends Component {
         this.articles.push(this.state.localStorageData);
         this.setState({ articles: this.articles.articles,});
        };
-        
+      
        this.FirstFive_setState(0,this.state.PageCards)
        this.ForNumber(this.articles.articles.length, this.state.PageCards);
        
   };
- 
-  ForNumber(a,b){
+  
+ForNumber(a,b){
    let i = 2;
    let le = a / b;
    this.LeNunmberArr={"Nu":[]};
@@ -1390,42 +1390,31 @@ export default class News extends Component {
    this.Page_setState(e, this.state.PageCards);
   };
 
-  
+  ChosePC(){
+   
+    
+ };
       
   render() {
     console.log("Rendew ");
-
+    
      
     return (
       <>
       <h1 className='Font-H1 font-bold text-center my-4'>{this.state.h1}</h1>
- {/* BootStap Paginatine */}
+ {/* BootStap Chose PageCards */}
+    
+        <input  onBlur={(e)=>{ this.setState((prew)=>({PageCards:prew.PageCards=Number(e.target.value) ,})); this.FirstFive_setState(0,Number(e.target.value)); this.ForNumber(this.articles.articles.length,Number(e.target.value))}} className="form-control me-2" pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Search" aria-label="Search" />
+        <button className="btn btn-outline-success" >Search</button>
+      
+
+{/* BootStap Paginatine */}
  <nav className='flex justify-center my-4 sticky top-0 z-20' aria-label="...">
   <ul className="pagination pagination-sm flex justify-center align-middle flex-wrap " >
     <li className="page-item active" onClick={this.Page2}> <a  className="page-link Font" href='#'>1</a>   </li>
     
     {this.LeNunmberArr.Nu.map((A, index)=> <Li_comp key={index} OnCkick={this.Page2} Number={A}/>)}
-    {/*this.LeNunmberArr.map(A=> <Li_comp OnCkick={this.Page2} Number={A}/>)*/}
- {/*  <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">2</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">3</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">4</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">5</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">6</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">7</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">8</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">9</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">10</a> </li>
-    <li className="page-item" onClick={this.Page1}> <a className="page-link Font" href='#'>11</a>      </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">12</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">13</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">14</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">15</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">16</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">17</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">18</a> </li>
-    <li className="page-item" onClick={this.Page2}> <a className="page-link Font" href="#">19</a> </li>
-     
-    */}
+    
     
     
   </ul>
@@ -1438,16 +1427,7 @@ export default class News extends Component {
         
          {this.state.articles.map((OBJ)=> <NewsItem key={OBJ.url} Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>)}
         
-         {/* <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/>
-         <NewsItem Title={OBJ.title} Description={OBJ.description} Link= {OBJ.url} Text= {this.TEXT} Img={OBJ.urlToImage}/> */}
+         
 
          </div>
 
