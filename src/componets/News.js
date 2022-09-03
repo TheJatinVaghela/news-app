@@ -1404,22 +1404,24 @@ ForNumber(a,b){
    this.Page_setState(e, this.state.PageCards);
   };
   
-  // {/*(e)=>{
-  //           this.setState((prew)=>({NUM: prew.NUM = Number(e.target.value),})) ;    
-  //           // NUM=Number(e.target.value);
-  //          if(this.state.NUM === 0 || isNaN(this.state.NUM)){
-  //            e.target.value=5;
-  //           console.log(Number(e.target.value));
-  //         };  
+  BLUR=(e)=>{
+          
+    let NUMe = Number(e.target.value);
+    if(NUMe === 0 || isNaN(NUMe)){
+      e.target.value=5;
+    console.log(Number(e.target.value));
+  };  
 
-  //          this.setState((prew)=>({
-  //           PageCards:prew.PageCards=Number(e.target.value) ,
-  //         }));
+    this.setState((prew)=>({
+    PageCards:prew.PageCards=Number(e.target.value) ,
+  })); 
 
-  //          this.FirstFive_setState(0,Number(e.target.value)); 
-  //          this.ForNumber(this.articles.articles.length,Number(e.target.value));
+    document.getElementById("h1").innerText= this.state.h1 + e.target.value;
 
-  //          e.target.value="";*/}
+    this.FirstFive_setState(0,Number(e.target.value)); 
+    this.ForNumber(this.articles.articles.length,Number(e.target.value));
+
+}
       
   render() {
     console.log("Rendew ");
@@ -1430,24 +1432,7 @@ ForNumber(a,b){
       <h1 className='Font-H1 font-bold text-center my-4' id="h1">{this.state.h1}5</h1>
  {/* BootStap Chose PageCards */}
         <h4 className='Font-H4 font-bold text-center mt-3'>Only Two Numbers</h4>
-        <input className="form-control mx-auto w-fit" onBlur={(e)=>{
-          
-            let NUMe = Number(e.target.value);
-            if(NUMe === 0 || isNaN(NUMe)){
-              e.target.value=5;
-            console.log(Number(e.target.value));
-          };  
-
-            this.setState((prew)=>({
-            PageCards:prew.PageCards=Number(e.target.value) ,
-          })); 
-
-            document.getElementById("h1").innerText= this.state.h1 + e.target.value;
-
-            this.FirstFive_setState(0,Number(e.target.value)); 
-            this.ForNumber(this.articles.articles.length,Number(e.target.value));
-        
-        }} pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Per Page Cards?" aria-label="Search" />
+        <input className="form-control mx-auto w-fit" onBlur={this.BLUR} pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Per Page Cards?" aria-label="Search" />
         <button className="btn bg-orange-500 hover:bg-orange-200 active:bg-orange-700 mx-auto block" >{this.props.Search}</button>
       
 
