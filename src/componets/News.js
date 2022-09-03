@@ -1338,9 +1338,9 @@ export default class News extends Component {
  // runs After evrything undder render() is done 
   async  componentDidMount(){
     console.log("DID MOUNT RENDER");
-       let LastLocalData = [].push(JSON.parse(localStorage.getItem("ParsedData")));
+       let LastLocalData = (JSON.parse(localStorage.getItem("ParsedData")));
        
-    if(LastLocalData.status==="error" || localStorage.length===0){
+    if(LastLocalData===null || LastLocalData.status==="error"){
          console.log("LastLocalData is NOT OK");
          let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=100&pageSize=100 `   
          let data =  await fetch(url);
@@ -1449,7 +1449,7 @@ ForNumber(a,b){
 </nav>
           
 
-      <div className='container my-3'>
+      <div className='my-3'>
 
          <div id='Main' className="grid gap-3">
         
