@@ -1330,6 +1330,7 @@ export default class News extends Component {
          localStorageData : "",
          PageCards:5,
          h1:"News HeadLines & Articles Per Page= ",
+         category:"business"
         }
         
         this.LeNunmberArr={"Nu":[],"Co":[]};
@@ -1339,15 +1340,13 @@ export default class News extends Component {
   async  componentDidMount(props){
     console.log("DID MOUNT RENDER");
        let LastLocalData = (JSON.parse(localStorage.getItem("ParsedData")));
-<<<<<<< HEAD
-       console.log(LastLocalData);
-    if(LastLocalData===null || localStorage.length===0){
-=======
+
+
        
     if(LastLocalData===null || LastLocalData.status==="error"){
->>>>>>> 438fc1889a434afc5d46aa155f35df3d6d8fa98e
+
          console.log("LastLocalData is NOT OK");
-         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=1&pageSize=20 `   
+         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.state.category} `   
          let data =  await fetch(url);
          let parsedData = await data.json();
          localStorage.setItem("ParsedData", JSON.stringify(parsedData));

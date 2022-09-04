@@ -16,8 +16,8 @@ export class App extends Component {
   render() {
     return (
       <>
-      <Navbar Key={this.key}/>
-       <News/>
+      <Navbar />
+       <News Key={this.key}/>
        
       </>
     )
