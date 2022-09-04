@@ -11,7 +11,7 @@ export default class News extends Component {
     }
     
     TEXT="Full Info";
-    articles={
+    articles={/*
       "status": "ok",
       "totalResults": 10032,
       "articles":[
@@ -1316,7 +1316,7 @@ export default class News extends Component {
             "publishedAt": "2022-08-29T16:06:24Z",
             "content": "Der Markt für Kryptowährungen leidet unter der Aussicht auf deutlich steigende Leitzinsen. Die nach Marktwert größte Digitalanlage Bitcoin kostete am Montagvormittag auf der Handelsplattform Bitfinex… [+1289 chars]"
           }
-        ]}
+        ]*/}
 
      
     articles2=[];
@@ -1336,13 +1336,13 @@ export default class News extends Component {
       
     };
  // runs After evrything undder render() is done 
-  async  componentDidMount(){
+  async  componentDidMount(props){
     console.log("DID MOUNT RENDER");
-       let LastLocalData = [].push(JSON.parse(localStorage.getItem("ParsedData")));
-       
-    if(LastLocalData.status==="error" || localStorage.length===0){
+       let LastLocalData = (JSON.parse(localStorage.getItem("ParsedData")));
+       console.log(LastLocalData);
+    if(LastLocalData===null || localStorage.length===0){
          console.log("LastLocalData is NOT OK");
-         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=100&pageSize=100 `   
+         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0e517df3867f479dbf0de42790ca2268&page=1&pageSize=20 `   
          let data =  await fetch(url);
          let parsedData = await data.json();
          localStorage.setItem("ParsedData", JSON.stringify(parsedData));
@@ -1354,14 +1354,17 @@ export default class News extends Component {
             }else if (parsedData.status==="ok"){
               console.log("Parsed Data OK");
               this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}));
-              this.articles=[];
-              this.articles.push(this.state.localStorageData);
+              this.articles = (parsedData);
+              console.log(this.articles);
               this.setState({ articles: this.articles.articles,});
             }
+            this.FirstFive_setState(0,this.state.PageCards)
+            this.ForNumber(this.articles.articles.length, this.state.PageCards);
     }else if(LastLocalData.status==="ok"){
         console.log("LastLocalData is OK");
-        this.articles=[];
-        this.articles.push(LastLocalData);
+        console.log(this.articles);
+        this.articles = (LastLocalData);
+        console.log(this.articles);
         this.setState({ articles: this.articles.articles,});
     };
 
@@ -1425,7 +1428,7 @@ ForNumber(a,b){
       
   render() {
     console.log("Rendew ");
-    
+    let {Key} = this.props
      
     return (
       <>

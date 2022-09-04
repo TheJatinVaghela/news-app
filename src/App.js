@@ -6,14 +6,17 @@ import News from './componets/News.js'
 
 export class App extends Component {
   // static propTypes = {
-
+   constructor(){
+    super();
+    this.key=process.env.REACT_APP_NEWS_API;
+   }
   // }
    
   
   render() {
     return (
       <>
-      <Navbar/>
+      <Navbar Key={this.key}/>
        <News/>
        
       </>
