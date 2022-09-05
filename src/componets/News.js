@@ -1344,18 +1344,20 @@ export default class News extends Component {
     console.log("DID MOUNT RENDER");
        let LastLocalData = (JSON.parse(localStorage.getItem("ParsedData")));
 
+      console.log(this.props.category);
 
-       
-    if(LastLocalData===null || LastLocalData.status==="error"){
+      
+      console.log(this.props.Key);
+      let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.props.category} `   
+      let data =  await fetch(url);
+      let parsedData = await data.json();
 
-         console.log("LastLocalData is NOT OK");
-         console.log(this.props.Key);
-         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.props.category} `   
-         let data =  await fetch(url);
-         let parsedData = await data.json();
+     
+    if(LastLocalData !== parsedData || LastLocalData===null || LastLocalData.status==="error"){
+
          localStorage.setItem("ParsedData", JSON.stringify(parsedData));
          //console.log(parsedData);
-         
+         console.log("LastLocalData is NOT OK");
             if (parsedData.status==="error") {
              console.log("Error");
              this.setState((prew)=>({ articles: prew.articles=this.articles.articles,}));
@@ -1368,7 +1370,7 @@ export default class News extends Component {
             }
            
             this.ForNumber(this.articles.articles.length, this.state.PageCards);
-    }else if(LastLocalData.status==="ok"){
+    }else if( LastLocalData === parsedData && LastLocalData.status==="ok"){
         console.log("LastLocalData is OK");
         console.log(this.articles);
         this.articles = (LastLocalData);
