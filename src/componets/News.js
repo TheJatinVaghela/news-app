@@ -1346,6 +1346,7 @@ export default class News extends Component {
     if(LastLocalData===null || LastLocalData.status==="error"){
 
          console.log("LastLocalData is NOT OK");
+         console.log(this.props.Key);
          let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.state.category} `   
          let data =  await fetch(url);
          let parsedData = await data.json();
