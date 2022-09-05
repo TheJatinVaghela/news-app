@@ -2,12 +2,15 @@ import React, { Component, useState } from 'react'
 import PropTypes from 'prop-types'
 import NewsItem from './NewsItem.js'
 import Li_comp from './LI_comp.js'
+import News_Category from './News_Category.js'
 export default class News extends Component {
     static defaultProps = {
       Search: 'Search',
+      category:"general",
     }
     static propType={
       Search: PropTypes.string,
+      category:PropTypes.string,
     }
     
     TEXT="Full Info";
@@ -1330,7 +1333,7 @@ export default class News extends Component {
          localStorageData : "",
          PageCards:5,
          h1:"News HeadLines & Articles Per Page= ",
-         category:"business"
+        
         }
         
         this.LeNunmberArr={"Nu":[],"Co":[]};
@@ -1347,7 +1350,7 @@ export default class News extends Component {
 
          console.log("LastLocalData is NOT OK");
          console.log(this.props.Key);
-         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.state.category} `   
+         let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.props.category} `   
          let data =  await fetch(url);
          let parsedData = await data.json();
          localStorage.setItem("ParsedData", JSON.stringify(parsedData));
@@ -1444,8 +1447,7 @@ ForNumber(a,b){
         <h4 className='Font-H4 font-bold text-center mt-3'>Only Two Numbers</h4>
         <input className="form-control mx-auto w-fit" onBlur={this.BLUR} pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Per Page Cards?" aria-label="Search" />
         <button className="btn bg-orange-500 hover:bg-orange-200 active:bg-orange-700 mx-auto block" >{this.props.Search}</button>
-      
-
+  <News_Category/>
 {/* BootStap Paginatine */}
  <nav className='flex justify-center my-4 sticky top-0 z-20' aria-label="...">
   <ul className="pagination pagination-sm flex justify-center align-middle flex-wrap " >
