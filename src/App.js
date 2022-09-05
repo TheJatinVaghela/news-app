@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Navbar from './componets/Navbar.js'
 import News from './componets/News.js'
+import Navbar from './componets/Navbar.js'
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export class App extends Component {
   // static propTypes = {
@@ -16,8 +17,17 @@ export class App extends Component {
   render() {
     return (
       <>
-      <Navbar />
-       <News Key={this.key}/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar />}>
+             <Route path="News" element={<News Key={this.key}/>}>
+               
+             </Route>
+          </Route>
+         </Routes>
+      </BrowserRouter>
+      
+       
        
       </>
     )

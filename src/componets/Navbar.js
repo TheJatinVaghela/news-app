@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Outlet, Link } from "react-router-dom";
 
 export default class Navbar extends Component {
     
@@ -11,9 +12,11 @@ export default class Navbar extends Component {
       <>
         <nav className="navbar top-0 bg-orange-600 sticky z-10">
            <div className="container-fluid !justify-center bg-transparent">
-              <a className="navbar-brand text-3xl font-bold" href="#/">{this.A_Bold}</a>
-          </div>
+              <Link className="navbar-brand text-3xl font-bold" to="/">{this.A_Bold}</Link>
+              <Link className="navbar-brand text-3xl font-bold" to="/News">News</Link>
+           </div>
         </nav>
+        <Outlet />
       </>
     )
   }

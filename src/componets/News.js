@@ -11,7 +11,7 @@ export default class News extends Component {
     }
     
     TEXT="Full Info";
-    articles={/*
+    articles={
       "status": "ok",
       "totalResults": 10032,
       "articles":[
@@ -1316,7 +1316,7 @@ export default class News extends Component {
             "publishedAt": "2022-08-29T16:06:24Z",
             "content": "Der Markt für Kryptowährungen leidet unter der Aussicht auf deutlich steigende Leitzinsen. Die nach Marktwert größte Digitalanlage Bitcoin kostete am Montagvormittag auf der Handelsplattform Bitfinex… [+1289 chars]"
           }
-        ]*/}
+        ]}
 
      
     articles2=[];
@@ -1355,7 +1355,7 @@ export default class News extends Component {
          
             if (parsedData.status==="error") {
              console.log("Error");
-             this.setState({ articles: this.articles.articles,});
+             this.setState((prew)=>({ articles: prew.articles=this.articles.articles,}));
             }else if (parsedData.status==="ok"){
               console.log("Parsed Data OK");
               this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}));
@@ -1363,7 +1363,7 @@ export default class News extends Component {
               console.log(this.articles);
               this.setState({ articles: this.articles.articles,});
             }
-            this.FirstFive_setState(0,this.state.PageCards)
+           
             this.ForNumber(this.articles.articles.length, this.state.PageCards);
     }else if(LastLocalData.status==="ok"){
         console.log("LastLocalData is OK");
@@ -1371,6 +1371,8 @@ export default class News extends Component {
         this.articles = (LastLocalData);
         console.log(this.articles);
         this.setState({ articles: this.articles.articles,});
+      this.ForNumber(this.articles.articles.length, this.state.PageCards);
+
     };
 
       this.FirstFive_setState(0,this.state.PageCards)
