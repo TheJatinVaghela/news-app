@@ -13,7 +13,9 @@ export default class News_Category extends Component {
   render() {
     return (
       <>
-      <nav className='flex flex-col z-40 w-fit h-fit bg-red-700 border-2 border-blue-600 sticky top-0'>
+      
+
+      <nav className='flex overflow-x-auto justify-between flex-row z-40 w-full h-fit bg-red-700 border-2 border-blue-600 Font-H4 font-bold'>
     
           <Link to="/business">business</Link>
           <Link to="/health">health</Link>

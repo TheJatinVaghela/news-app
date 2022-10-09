@@ -4,7 +4,7 @@
 
 
 .grid{
-  grid-template-columns: repeat(auto-fit, minmax(clamp(10rem, 10rem + 10.333vw, 1000rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(clamp(9rem, 9rem + 10.333vw, 1000rem), 1fr));
   grid-column-gap: 3rem;
     grid-row-gap: 2rem;
 }

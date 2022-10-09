@@ -1341,14 +1341,14 @@ export default class News extends Component {
     };
  // runs After evrything undder render() is done 
   async  componentDidMount(props){
-    console.log("DID MOUNT RENDER");
+    //console.log("DID MOUNT RENDER");
        let LastLocalData = (JSON.parse(localStorage.getItem("ParsedData")));
 
-      console.log(this.props.category);
+      //console.log(this.props.category);
 
       
-      console.log(this.props.Key);
-      let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=20&category=${this.props.category} `   
+      //console.log(this.props.Key);
+      let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.props.Key}&page=1&pageSize=31&category=${this.props.category} `   
       let data =  await fetch(url);
       let parsedData = await data.json();
 
@@ -1356,25 +1356,25 @@ export default class News extends Component {
     if(LastLocalData !== parsedData || LastLocalData===null || LastLocalData.status==="error"){
 
          localStorage.setItem("ParsedData", JSON.stringify(parsedData));
-         //console.log(parsedData);
-         console.log("LastLocalData is NOT OK");
+         ////console.log(parsedData);
+         //console.log("LastLocalData is NOT OK");
             if (parsedData.status==="error") {
-             console.log("Error");
+             //console.log("Error");
              this.setState((prew)=>({ articles: prew.articles=this.articles.articles,}));
             }else if (parsedData.status==="ok"){
-              console.log("Parsed Data OK");
+              //console.log("Parsed Data OK");
               this.setState((prew)=>({localStorageData: prew = JSON.parse(localStorage.getItem("ParsedData"))}));
               this.articles = (parsedData);
-              console.log(this.articles);
+              //console.log(this.articles);
               this.setState({ articles: this.articles.articles,});
             }
            
             this.ForNumber(this.articles.articles.length, this.state.PageCards);
     }else if( LastLocalData === parsedData && LastLocalData.status==="ok"){
-        console.log("LastLocalData is OK");
-        console.log(this.articles);
+        //console.log("LastLocalData is OK");
+        //console.log(this.articles);
         this.articles = (LastLocalData);
-        console.log(this.articles);
+        //console.log(this.articles);
         this.setState({ articles: this.articles.articles,});
       this.ForNumber(this.articles.articles.length, this.state.PageCards);
 
@@ -1393,7 +1393,7 @@ ForNumber(a,b){
       this.LeNunmberArr.Nu.push(i++);
     }
     };
-  //console.log(this.LeNunmberArr);
+  ////console.log(this.LeNunmberArr);
   }  ;
 
   FirstFive_setState(a,b){
@@ -1424,7 +1424,7 @@ ForNumber(a,b){
     let NUMe = Number(e.target.value);
     if(NUMe === 0 || isNaN(NUMe)){
       e.target.value=5;
-    console.log(Number(e.target.value));
+    //console.log(Number(e.target.value));
   };  
 
     this.setState((prew)=>({
@@ -1439,7 +1439,7 @@ ForNumber(a,b){
 }
       
   render() {
-    console.log("Rendew ");
+    //console.log("Rendew ");
     let {Key} = this.props
      
     return (
@@ -1447,11 +1447,11 @@ ForNumber(a,b){
       <h1 className='Font-H1 font-bold text-center my-4' id="h1">{this.state.h1}5</h1>
  {/* BootStap Chose PageCards */}
         <h4 className='Font-H4 font-bold text-center mt-3'>Only Two Numbers</h4>
-        <input className="form-control mx-auto w-fit" onBlur={this.BLUR} pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Per Page Cards?" aria-label="Search" />
+        <input className="form-control mx-auto Font-H4" onBlur={this.BLUR} pattern="[0-9]+"  maxLength="2" id="Search" type="search" placeholder="Per Page Cards?" aria-label="Search" />
         <button className="btn bg-orange-500 hover:bg-orange-200 active:bg-orange-700 mx-auto block" >{this.props.Search}</button>
-  <News_Category/>
 {/* BootStap Paginatine */}
- <nav className='flex justify-center my-4 sticky top-0 z-20' aria-label="...">
+ <nav className='flex flex-wrap items-center my-4 sticky top-0 z-20 flex-col' aria-label="...">
+  <News_Category/>
   <ul className="pagination pagination-sm flex justify-center align-middle flex-wrap " >
     <li className="page-item active" onClick={this.Page2}> <a  className="page-link Font" href='#'>1</a>   </li>
     
